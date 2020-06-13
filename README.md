@@ -1,2 +1,2 @@
 # autoscaling-dns
-autoscaling-dns-handler
+autoscaling-dns
