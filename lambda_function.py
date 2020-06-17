@@ -10,12 +10,11 @@ def process_record(message):
     lifecycle_transition = message['LifecycleTransition']
     autoscaling_group_name = message['AutoScalingGroupName']
     instance_id = message['EC2InstanceId']
-    instance_id_replaced = instance_id.replace("i-", "")
 
     domain = autoscaling.get_tag_value(autoscaling_group_name, "AutoscalingDNS_Domain")
     ip_type = autoscaling.get_tag_value(autoscaling_group_name, "AutoscalingDNS_IPType")
     sub_domain_prefix = autoscaling.get_tag_value(autoscaling_group_name, "AutoscalingDNS_SubDomainPrefix")
-    sub_domain = "{}-{}".format(sub_domain_prefix, instance_id_replaced)
+    sub_domain = "{}-{}".format(sub_domain_prefix, instance_id)
 
     if lifecycle_transition == "autoscaling:EC2_INSTANCE_LAUNCHING":
         record_operation = "UPSERT"
